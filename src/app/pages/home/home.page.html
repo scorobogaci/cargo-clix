@@ -1,20 +1,35 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Home</ion-title>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/new-item']">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-title>Administrator</ion-title>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/new-item']">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-item>
+        <ion-label *ngFor="let seat of seats " [ngClass]="{'active-table-filter': seat.active === true }"
+                   (click)="activeFilter(seat)">
+            {{ seat.capacity }}
+        </ion-label>
+        <p style="color: #bb1c5d" (click)="clearFilters()">clear</p>
+    </ion-item>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let item of items" [routerLink]="['/update-item', item.id]">
-      <ion-label>
-        {{ item.title }}
-      </ion-label>
-    </ion-item>
-  </ion-list>
+
+    <ion-list>
+        <ion-item *ngFor="let table of filteredTables">
+            <ion-label>
+                {{ table.name }}
+            </ion-label>
+
+            <ion-label>
+                {{ 'Seats : ' + table.seats }}
+            </ion-label>
+            <p><span
+                    [ngClass]="{'table-available': table.status ==='AVAILABLE', 'table-booked':table.status==='BOOKED' }"></span>
+            </p>
+        </ion-item>
+    </ion-list>
 </ion-content>

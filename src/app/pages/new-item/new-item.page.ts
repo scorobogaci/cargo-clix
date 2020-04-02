@@ -11,6 +11,7 @@ import { ItemService } from '../../services/item.service';
 export class NewItemPage implements OnInit {
 
   new_item_form: FormGroup;
+  activeSubmitButton = true;
 
   constructor(
     private router: Router,
@@ -20,13 +21,15 @@ export class NewItemPage implements OnInit {
 
   ngOnInit() {
     this.new_item_form = this.formBuilder.group({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
     });
   }
 
   goBack(){
     this.router.navigate(['/home']);
+  }
+
+  activateButton(){
+    this.activeSubmitButton = false;
   }
 
   createItem(value){

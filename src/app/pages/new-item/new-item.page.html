@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>New Item</ion-title>
+    <ion-title>Booking</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,15 +9,28 @@
 
 <ion-content padding>
   <form [formGroup]="new_item_form" (submit)="createItem(new_item_form.value)">
+
     <ion-item>
-      <ion-label color="primary" position="floating">Title</ion-label>
-      <ion-input type="text" formControlName="title" required></ion-input>
+      <ion-label>Select Table</ion-label>
+      <ion-select value="brown" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="brown">AA7 2 seats</ion-select-option>
+        <ion-select-option value="blonde">AA8 4 seats</ion-select-option>
+        <ion-select-option value="black">AA9 6 seats</ion-select-option>
+        <ion-select-option value="red">AA8 5 seats</ion-select-option>
+      </ion-select>
     </ion-item>
+
     <ion-item>
-      <ion-label color="primary" position="floating">Description</ion-label>
-      <ion-input type="text" formControlName="description" required></ion-input>
+      <ion-label>Select date</ion-label>
+      <ion-datetime displayFormat="MM DD YY"></ion-datetime>
     </ion-item>
-    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_item_form.valid">Create</ion-button>
+
+    <ion-item>
+      <ion-label>Select time</ion-label>
+      <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45" (click)="activateButton()"></ion-datetime>
+    </ion-item>
+
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="activeSubmitButton">Book table</ion-button>
   </form>
 
 </ion-content>
